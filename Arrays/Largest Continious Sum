@@ -1,0 +1,19 @@
+def largest_cont_sum(arr):
+
+    if len(arr)==0:
+        print("You must enter an array.")
+        return False
+    current_sum= max_sum=arr[0] # We set the first element to both these variabes
+
+    for element in arr[1:]: # We start with element 1 because we already used element 0
+
+        current_sum = max(current_sum+element, element) # We calculated which one is bigger
+        # Ex. if first two elements were negative then we eleminate those two valuaes and get the positive one
+
+        max_sum = max(max_sum,current_sum)      # And then we calculated the which one is bigger
+
+    print(f"The maximum sum is : {max_sum}")
+    return max_sum
+
+
+largest_cont_sum([1,2,-1,3,4,-10,10,-10,-1])
