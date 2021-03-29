@@ -1,0 +1,18 @@
+class DoublyLinkedList(object):
+    def __init__(self, value):
+        self.value = value
+        self.nextNode = None
+        self.prevNode = None
+
+
+a = DoublyLinkedList(1)
+b = DoublyLinkedList(5)
+c = DoublyLinkedList(10)
+
+a.nextNode = b
+b.nextNode = c
+c.prevNode = b
+b.prevNode = a
+print(a.value)
+print(b.prevNode.value)
+print(c.prevNode.value)
