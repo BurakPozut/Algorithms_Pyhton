@@ -1,0 +1,36 @@
+class Node(object):
+    def __init__(self, value):
+        self.value = value
+        self.nextNode = None
+
+
+def reverse_list(node):  # This node must be the head node
+    current = node
+    previous = None
+    next_node = None
+    while current:
+        next_node = current.nextNode
+        current.nextNode = previous
+        previous = current
+        current = next_node
+    return previous
+
+
+a = Node(1)
+b = Node(2)
+c = Node(3)
+d = Node(4)
+
+a.nextNode = b
+b.nextNode = c
+c.nextNode = d
+
+print(a.nextNode.value)
+print(b.nextNode.value)
+print(c.nextNode.value)
+
+reverse_list(a)
+
+print("----")
+print(b.nextNode.value)
+print(c.nextNode.value)
