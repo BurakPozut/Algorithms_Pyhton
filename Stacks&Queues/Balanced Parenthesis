@@ -1,0 +1,24 @@
+def BalanceCheck(s):
+    if len(s) % 2 != 0:
+        return False
+    
+    open = []
+    for i in s:
+        if '(' == i or '[' == i or '{' == i:    # Getting open parentheses and stacking them
+            open.append(i)
+        elif ')' == i and open != []:   # If we get a close parentheses and the stack is not empty...
+            if '(' != open.pop():   # ...We check if the pop(top element of the stack) is what we want
+                return False
+        elif ']' == i and open != []:
+            if '[' != open.pop():
+                return False
+        elif '}' == i and open != []:
+            if '{' != open.pop():
+                return False
+
+    if open:  # After the loop if the stack is not empty it means it is not balanced so we return False
+        return False
+    return True
+
+
+print(BalanceCheck("([]{})"))
