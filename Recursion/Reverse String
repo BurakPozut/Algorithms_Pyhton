@@ -1,0 +1,9 @@
+def reverse(string):  # We are trying to reverse a string using recursion
+    if len(string) == 1:
+        print(string)
+        return
+    reverse(string[1:])
+    print(string[0])
+
+
+reverse("Burak Pozüt")
