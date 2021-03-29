@@ -1,0 +1,46 @@
+change = []
+
+
+def rec_coin(money, coins):
+    if money == 0:
+        return 0
+    else:
+        if money-coins[-1] >= 0:
+            change.append(coins[-1])
+            rec_coin(money-coins[-1], coins)
+        else:
+            rec_coin(money, coins[:-1])
+
+
+rec_coin(63, [1, 2, 5])
+print(len(change))
+
+
+#dynamic solution
+def dyna_coin(target, coins, known_results):
+    # Default output to target
+    min_coins = target
+    # Base case
+    if target in coins:
+        known_results[target] = 1
+        return 1
+
+    # Return a known result if it happens to be greater than 1
+    elif known_results[target] > 0:
+        return known_results[target]
+
+    else:
+        # For every value that is <= target
+        for i in [c for c in coins if c<=target]:
+            num_coins=1+dyna_coin(target-i,coins,known_results)
+            if num_coins < min_coins:
+                min_coins = num_coins
+                # Reset that known result
+                known_results[target] = min_coins
+
+    return min_coins
+
+
+target = 74
+know_results = [0]*(target+1)
+print(dyna_coin(target, [1, 5, 10, 25], know_results))
