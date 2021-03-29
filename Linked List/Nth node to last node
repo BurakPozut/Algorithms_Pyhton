@@ -1,0 +1,30 @@
+class Node(object):
+    def __init__(self, value):
+        self.value = value
+        self.nextNode = None
+
+
+def nth_to_last_node(header, n):  # n means the nth node  we want tho find ex. 5 th node after end of the linked list
+    nodes = []
+    while header != None:  # We will use a stack for this problem.
+        nodes.append(header)  # We stacked the whole nodes and then we will pop nth times
+        header = header.nextNode
+
+    while n > 0:
+        if n == 1:
+            return nodes.pop().value
+        nodes.pop()
+        n -= 1
+
+
+a = Node(1)
+b = Node(2)
+c = Node(3)
+d = Node(4)
+
+a.nextNode = b
+b.nextNode = c
+c.nextNode = d
+
+print(nth_to_last_node(a, 3))
+# And we can also use 2 pointers to find out the solution instead of using stack
