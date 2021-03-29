@@ -1,0 +1,26 @@
+class Node(object):
+    def __init__(self, value):
+        self.value = value
+        self.nextNode = None
+
+
+def cycle_check(node):
+    point1 = node   # We created a 2 points
+    point2 = node
+    while point2 != None and point2.nextNode != None:  # In while loop we will run the code till point2 becomes None
+        point1 = point1.nextNode
+        point2 = point2.nextNode.nextNode  # point2 is moving faster than point1 so eventually it will catch it
+
+        if point2 == point1:  # If point2 catches point1 that means this linked list is cycle
+            return True
+    return False
+
+
+a = Node(1)
+b = Node(2)
+c = Node(3)
+
+a.nextNode = b
+b.nextNode = c
+
+print(cycle_check(a))
