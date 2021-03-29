@@ -1,0 +1,19 @@
+def rev_sentence(s):
+    words=[]
+    space = [' ']
+    lenght = len(s)
+    i = 0
+    while i < lenght:
+        if s[i] not in space:
+            word_start = i
+
+            while i < lenght and s[i] not in space:
+                i+=1
+            words.append(s[word_start:i])
+
+        i += 1
+
+
+    print(" ".join(reversed(words)))
+
+rev_sentence(' Burak Pozut  ')
