@@ -1,0 +1,40 @@
+import collections
+class Node(object):
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+
+def level_order(tree):
+    if not tree:
+        return
+
+    nodes = collections.deque([tree])   # We are using collections package for this code and
+    # we are using deque in collection because unlike queues in deque we can pop and add left or right to the array
+    currentCount = 1    # We set it 1 because there is 1 node in root
+    nextCount = 0   # This is the next level's node number we will incereas it later on if our node has childiren
+
+    while len(nodes) != 0:
+        currentNode = nodes.popleft()
+        currentCount -=1    # Since we got 1 element in the array we are decreasing the current count variable
+        print(currentNode.val, end=' ')
+
+        if currentNode.left:
+            nodes.append(currentNode.left)  # If our node has a left child we add that to the deque
+            nextCount +=1   # since our node has a child we add 1  to the next count
+            if currentNode.right:
+                nodes.append(currentNode.right)
+                nextCount +=1
+            if currentCount == 0:   #This means we finished printing that level
+                print('\n')
+                currentCount,nextCount = nextCount,currentCount # Since the nextCount holds the value of how many
+                # childiren this node has we set that value to the current count
+
+
+a = Node(10)
+a.left = Node(5)
+a.right = Node(15)
+
+
+level_order(a)
