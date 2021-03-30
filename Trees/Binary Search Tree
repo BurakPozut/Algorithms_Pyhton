@@ -1,0 +1,77 @@
+class BinarySearchTree(object):
+    def __init__(self,val=None):
+        self.val = val
+        self.left = None
+        self.right = None
+
+    def insert(self, val):
+        if not self.val:    # If there is no value put the value
+            self.val = val
+            return
+
+        if self.val == val: # If the value already exist return
+            return
+
+        if val < self.val:  # If value is smaller than the node's value go to the node's left child
+            if self.left:   # If the node had a left child we will do recursion whit this node's left child
+                self.left.insert(val)
+                return
+            self.left = BinarySearchTree(val)
+            return
+
+        if self.right:  # If value is bigger than the node's value go to the node's right child
+            self.right.insert(val)  # If node has a right child we will do recusion with its right child
+            return
+        self.right = BinarySearchTree(val)
+
+    def inorder(self):
+        if root is not None:
+            inorder(self.left)
+            print(self.val)
+            inorder(self.right)
+
+    def get_min(self):
+        current = self
+        while current.left is not None: # If the node has left child we will go till the node has no left child
+            current = current.left
+        return current.val
+
+    def get_max(self):
+        current = self
+        while current.right is not None: # If the node has right child we will go till the node has no right child
+            current = current.right
+        return current.val
+
+    def delete(self, val):
+        if val < self.val:  # If the value we are tyring to delete is smaller than the node we will go to left child
+            self.left = self.left.delete(val)
+            return self
+        elif val > self.val:   # If the value we are tyring to delete is bigger than the node we will go to right child
+            self.right = self.right.delete(val)
+            return self
+        else:   # If the value is the same as the node's value
+            if self.left is None:   # These two if statements are for nodes with one child or none
+                temp = self.right
+                self = None
+                return temp
+            elif self.right is None:
+                temp = self.left
+                self = None
+                return temp
+
+            temp = get_min(self.right)  # If node has 2 successor we will return the inorder succsessor (smallest in right sub tree)
+            self.val = temp.val
+            self.right = delete(self.right,temp.val)
+        return self
+
+    def exists(self, val):
+        if self.val == val:
+            return True
+        if val < self.val:
+            if self.left == None:
+                return False
+            return self.left.exists(val)
+
+        if self.right  == None:
+            return False
+        return self.right.exists(val)
